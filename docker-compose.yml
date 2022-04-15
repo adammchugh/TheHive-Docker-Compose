@@ -11,8 +11,6 @@ services:
       - CASSANDRA_CLUSTER_NAME=thp
     volumes:
       - cassandra_data:/var/lib/cassandra/data
-    networks:
-      - Hive
 
   elasticsearch:
     container_name: elasticsearch
@@ -35,8 +33,6 @@ services:
     volumes:
       - elastic_data:/usr/share/elasticsearch/data
       - elastic_logs:/usr/share/elasticsearch/logs
-    networks:
-      - Hive
 
   cortex:
     container_name: cortex
@@ -53,8 +49,6 @@ services:
       - cortex_logs:/var/log/cortex
       - /tmp:/tmp
     privileged: true
-    networks:
-      - Hive
 
   thehive:
     container_name: thehive
@@ -71,12 +65,6 @@ services:
     command:
       --cortex-port 9001
       --cortex-keys ${CORTEX_KEY}
-    networks:
-      - Hive
-
-networks:
-  Hive:
-    driver: bridge
 
 volumes:
   thehive_data:
